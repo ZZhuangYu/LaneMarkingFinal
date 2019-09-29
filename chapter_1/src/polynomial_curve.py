@@ -22,8 +22,30 @@ class PolynomialCurve(object):
         ######################################################
         # TODO: implement your polynomial curve fitting here #
         ################ your code starts ####################
+        x = np.zeros((len(points), 1))
+        x2 = np.zeros((len(points), 1))
+        x3 = np.zeros((len(points), 1))
+        y = np.zeros((len(points), 1))
+        A = np.ones((len(points), 4))
+        for i in range(len(points)):
+            x[i] = points[i][0]
+            y[i] = points[i][1]
+            x2[i] = pow((points[i][0]), 2)
+            x3[i] = pow((points[i][0]), 3)
 
+            A[i][1] = x[i]
+            A[i][2] = x2[i]
+            A[i][3] = x3[i]
+        At = A.transpose()
+        AtA = At.dot(A)
+        AtA_inv = np.linalg.inv(AtA)
+        AtA_invAt = AtA_inv.dot(At)
+        c = AtA_invAt.dot(y)
 
+        c0 = c[0]
+        c1 = c[1]
+        c2 = c[2]
+        c3 = c[3]
         ################# your code ends #####################
 
         return c0, c1, c2, c3

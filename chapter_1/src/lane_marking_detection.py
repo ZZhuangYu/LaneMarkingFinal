@@ -17,9 +17,12 @@ def detect_edges(image):
     ############################################
     # TODO: implement your edge detection here #
     ############ your code starts ##############
+    img_gau = cv.GaussianBlur(image, (9, 9), 0)
+    #Canny
+    edge_image = cv.Canny(img_gau,80,240)
 
-
-
+    #Sobel
+    #edge_image = cv.Sobel(img_gau, cv.CV_16S, 1, 1, ksize = 5)
 
     ############# your code ends ###############
 
